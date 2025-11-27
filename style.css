@@ -1,0 +1,79 @@
+/* خلفية الموقع */
+body {
+    margin: 0;
+    font-family: "Tajawal", sans-serif;
+    background: #0a0a0a;
+    color: white;
+}
+
+/* الهيدر */
+header {
+    background: linear-gradient(90deg, #0F0C29, #302B63, #24243E);
+    padding: 25px;
+    text-align: center;
+    border-bottom: 2px solid #00FF9D;
+}
+
+header h1 {
+    font-size: 32px;
+    color: #00FF9D;
+    margin: 0;
+}
+
+header p {
+    color: #ccc;
+}
+
+/* المنتجات */
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.product {
+    background: #111;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px #00FF9D33;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.product:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px #00FF9D;
+}
+
+.product img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* الأزرار */
+button {
+    background: #00FF9D;
+    color: #000;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #00c77d;
+}
+
+/* الفوتر */
+footer {
+    text-align: center;
+    padding: 15px;
+    margin-top: 30px;
+    background: #111;
+    border-top: 1px solid #00FF9D;
+}
