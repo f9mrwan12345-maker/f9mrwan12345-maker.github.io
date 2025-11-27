@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>حسابي — متجر لوفي</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <div class="logo">متجر لوفي</div>
+    <nav class="main-nav">
+      <a href="index.html">الرئيسية</a>
+      <a href="cart.html">السلة</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="account-area">
+    <h2>حسابي</h2>
+    <div id="acc-info" class="card"></div>
+
+    <h3>الطلبات</h3>
+    <div id="acc-orders"></div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  © 2025 متجر لوفي
+</footer>
+
+<script>
+const user = JSON.parse(localStorage.getItem('luffy_user')||'null');
+if(!user){ alert('سجّل الدخول أولاً'); location.href='login.html'; }
+document.getElementById('acc-info').innerHTML = `<p><strong>البريد:</strong> ${user.email}</p>
+<button class="btn ghost" id="logout">تسجيل خروج</button>`;
+document.getElementById('logout').addEventListener('click', ()=>{ localStorage.removeItem('luffy_user'); location.href='index.html'; });
+
+const orders = JSON.parse(localStorage.getItem('luffy_orders_'+(user.email||'guest'))||'[]');
+const out = document.getElementById('acc-orders');
+if(orders.length===0) out.innerHTML = '<div class="small muted">لا توجد طلبات بعد</div>';
+else orders.forEach(o=>{
+  const el = document.createElement('div');
+  el.className='card';
+  el.innerHTML = `<div><strong>${o.id}</strong></div><div class="small muted">المحتوى: ${o.items}</div><div style="margin-top:6px;color:#9fff6a">المبلغ: ${o.total} د.ل</div>`;
+  out.appendChild(el);
+});
+</script>
+</body>
+</html>
