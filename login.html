@@ -1,61 +1,85 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>تسجيل دخول — متجر لوفي</title>
-<link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تسجيل الدخول - متجر لوفي</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: 'Tajawal', sans-serif;
+        background-color: #0d0f17;
+        color: #fff;
+        text-align: center;
+    }
+
+    .container {
+        margin: 40px auto;
+        width: 90%;
+        max-width: 400px;
+        background: #161925;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 0 10px #000;
+    }
+
+    h2 {
+        color: #4da3ff;
+        margin-bottom: 20px;
+    }
+
+    input {
+        width: 90%;
+        padding: 12px;
+        border: none;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        font-size: 16px;
+        outline: none;
+        text-align: right;
+    }
+
+    button {
+        width: 95%;
+        padding: 12px;
+        border: none;
+        border-radius: 10px;
+        background: #1f75ff;
+        color: #fff;
+        font-size: 18px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+
+    .google-btn {
+        background: #db4437;
+        margin-top: 15px;
+    }
+
+    .link {
+        display: block;
+        color: #4da3ff;
+        margin-top: 15px;
+        text-decoration: none;
+    }
+</style>
 </head>
+
 <body>
-<header class="site-header">
-  <div class="wrap header-inner">
-    <div class="logo">متجر لوفي</div>
-    <nav class="main-nav">
-      <a href="index.html">الرئيسية</a>
-      <a href="cart.html">السلة</a>
-    </nav>
-  </div>
-</header>
 
-<main class="wrap">
-  <section class="auth-box">
-    <h2>تسجيل دخول / إنشاء حساب</h2>
+<div class="container">
+    <h2>تسجيل الدخول</h2>
 
-    <label>البريد الإلكتروني</label>
-    <input id="email" type="email" placeholder="you@example.com">
+    <input type="text" placeholder="اسم المستخدم">
+    <input type="password" placeholder="كلمة المرور">
 
-    <label>كلمة المرور</label>
-    <input id="pass" type="password" placeholder="********">
+    <button>دخول</button>
 
-    <div class="row">
-      <button id="btn-login" class="btn">دخول</button>
-      <button id="btn-register" class="btn ghost">إنشاء حساب</button>
-    </div>
+    <button class="google-btn">تسجيل دخول عبر Google</button>
 
-    <p class="small muted">التسجيل محلي للاستخدام مع هذه النسخة: يخزن في متصفحك فقط.</p>
-  </section>
-</main>
+    <a href="register.html" class="link">إنشاء حساب جديد</a>
+</div>
 
-<footer class="site-footer">
-  © 2025 متجر لوفي
-</footer>
-
-<script>
-/* بسيط: حفظ المستخدم في localStorage */
-document.getElementById('btn-register').addEventListener('click', ()=>{
-  const email = document.getElementById('email').value.trim();
-  const pass = document.getElementById('pass').value.trim();
-  if(!email||!pass){ alert('ادخل البريد و كلمة المرور'); return; }
-  localStorage.setItem('luffy_user', JSON.stringify({email}));
-  alert('تم إنشاء الحساب'); location.href='index.html';
-});
-document.getElementById('btn-login').addEventListener('click', ()=>{
-  const email = document.getElementById('email').value.trim();
-  const pass = document.getElementById('pass').value.trim();
-  if(!email||!pass){ alert('ادخل البريد و كلمة المرور'); return; }
-  localStorage.setItem('luffy_user', JSON.stringify({email}));
-  alert('تم تسجيل الدخول'); location.href='index.html';
-});
-</script>
 </body>
 </html>
