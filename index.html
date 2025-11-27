@@ -1,172 +1,569 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>متجر لوفي – بطاقات و شحن ألعاب</title>
-
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>متجر لوفي — شحن وبطاقات</title>
 <style>
-body {
-  margin:0;
-  font-family: Arial, sans-serif;
-  background:#0b0b0c;
-  color:white;
-}
+  :root{
+    --bg:#0b0b0c;
+    --card:#141416;
+    --accent:#ff0033;
+    --neon:#00eaff;
+    --muted:#999;
+    --glass: rgba(255,255,255,0.03);
+  }
 
-/*HEADER*/
-header {
-  background:#111;
-  padding:15px 20px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  position:sticky;
-  top:0;
-  z-index:100;
-}
-header .logo {
-  font-size:22px;
-  font-weight:bold;
-  color:#00eaff;
-}
-nav a {
-  margin-left:15px;
-  color:#fff;
-  text-decoration:none;
-  font-size:16px;
-}
-nav a:hover { color:#00eaff; }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family: "Tajawal", "Cairo", Arial, sans-serif;
+    background: linear-gradient(180deg,var(--bg), #070707);
+    color:#fff;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+  }
 
-/* HERO */
-.hero {
-  background:url('https://i.imgur.com/9E1iN0i.jpeg') center/cover no-repeat;
-  height:230px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-}
-.hero h1 {
-  background:rgba(0,0,0,0.6);
-  padding:15px 25px;
-  border-radius:10px;
-  font-size:26px;
-}
+  /* HEADER */
+  header{
+    position:sticky; top:0; z-index:1000;
+    background:linear-gradient(90deg,#071018 0%, #0b0b0c 100%);
+    border-bottom:1px solid rgba(255,255,255,0.03);
+    padding:10px 18px;
+    display:flex; align-items:center; gap:12px; justify-content:space-between;
+  }
+  .logo {font-weight:800; color:var(--neon); font-size:20px;}
+  nav{display:flex; gap:12px; align-items:center;}
+  nav a{
+    color:#ddd; text-decoration:none; padding:8px 12px; border-radius:8px;
+    transition:.15s; font-size:14px;
+  }
+  nav a:hover{background:var(--glass); color:var(--neon);}
 
-/* SECTION TITLE */
-.section-title {
-  padding:20px;
-  font-size:22px;
-  color:#00eaff;
-  font-weight:bold;
-}
+  .header-right{display:flex; gap:8px; align-items:center;}
+  .icon-btn{background:transparent; border:1px solid rgba(255,255,255,0.04); color:#fff; padding:8px 10px; border-radius:8px; cursor:pointer}
+  .cart-count{background:var(--accent); color:white; font-weight:700; padding:2px 7px; border-radius:100px; margin-left:6px; font-size:13px;}
 
-/* CARDS GRID */
-.container {
-  padding:20px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(170px,1fr));
-  gap:20px;
-}
+  /* LAYOUT */
+  .wrap{max-width:1100px; margin:22px auto; padding:0 16px;}
+  .hero{
+    background: linear-gradient(90deg, rgba(0,0,0,0.6), rgba(0,0,0,0.5)), url('https://i.ibb.co/yWzpp4v/gaming-bg.jpg') center/cover no-repeat;
+    height:220px; border-radius:12px; display:flex; align-items:center; justify-content:center; text-align:center;
+  }
+  .hero h1{font-size:28px; margin:0; color:var(--neon); padding:12px 18px; background:rgba(0,0,0,0.5); border-radius:8px;}
 
-.card {
-  background:#19191b;
-  padding:10px;
-  border-radius:12px;
-  text-align:center;
-  transition:0.3s;
-  cursor:pointer;
-}
-.card:hover {
-  transform:scale(1.05);
-}
-.card img {
-  width:100%;
-  border-radius:10px;
-}
-.card-title {
-  font-size:17px;
-  margin-top:10px;
-  font-weight:bold;
-}
+  /* CATEGORIES */
+  .cats{display:flex; gap:10px; overflow:auto; padding:14px 0; margin-top:14px}
+  .cat{background:rgba(255,255,255,0.02); padding:8px 14px; border-radius:999px; color:#ddd; cursor:pointer; white-space:nowrap; border:1px solid rgba(255,255,255,0.02)}
+  .cat.active{background:linear-gradient(90deg,var(--neon), #00a8c3); color:#071018; font-weight:700}
 
-/* FOOTER */
-footer {
-  margin-top:25px;
-  background:#111;
-  padding:15px;
-  text-align:center;
-  color:#999;
-}
+  /* GRID */
+  .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:16px; margin-top:18px}
+  .card{
+    background:var(--card); border-radius:12px; padding:12px; transition:transform .15s, box-shadow .15s; border:1px solid rgba(255,255,255,0.02);
+    display:flex; flex-direction:column; gap:8px;
+  }
+  .card:hover{transform:translateY(-6px); box-shadow:0 10px 30px rgba(0,0,0,0.6)}
+  .card img{width:100%; height:150px; object-fit:cover; border-radius:8px; background:#000}
+  .card .title{font-weight:700; color:#fff; font-size:16px}
+  .card .desc{color:var(--muted); font-size:13px; min-height:36px}
+  .price-row{display:flex; justify-content:space-between; align-items:center; gap:10px}
+  .price{color:#9fff6a; font-weight:800}
+  .small{font-size:13px; color:var(--muted)}
+
+  .actions{display:flex; gap:8px}
+  .btn{background:var(--neon); color:#071018; border:none; padding:10px 12px; border-radius:8px; cursor:pointer; font-weight:700; text-decoration:none; text-align:center}
+  .btn.ghost{background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.06)}
+  .btn.warn{background:var(--accent); color:#fff}
+
+  /* SIDEBAR CART */
+  .cart-panel{
+    position:fixed; right:16px; top:80px; width:320px; max-width:92%; background:linear-gradient(180deg, rgba(15,15,15,0.98), rgba(10,10,10,0.98)); padding:12px; border-radius:10px; border:1px solid rgba(255,255,255,0.03);
+    box-shadow:0 10px 30px rgba(0,0,0,0.6); z-index:1200;
+  }
+  .cart-panel h3{margin:0 0 8px 0; color:var(--neon)}
+  .cart-item{display:flex; gap:10px; align-items:center; margin-bottom:10px}
+  .cart-item img{width:56px; height:40px; object-fit:cover; border-radius:6px}
+  .cart-item .meta{flex:1}
+  .cart-item .meta .name{font-weight:700; font-size:14px}
+  .cart-item .meta .q{font-size:13px; color:var(--muted)}
+  .cart-item .price{font-weight:800; color:#b3ff9a}
+  .cart-footer{border-top:1px solid rgba(255,255,255,0.03); padding-top:10px; margin-top:8px; display:flex; flex-direction:column; gap:8px}
+  .total-row{display:flex; justify-content:space-between; font-weight:800; font-size:18px}
+  .checkout-wrap{display:flex; gap:8px}
+
+  /* LOGIN MODAL */
+  .modal{
+    position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.6); z-index:2000;
+  }
+  .modal .box{width:360px; max-width:95%; background:linear-gradient(180deg,#0f0f12,#0b0b0b); padding:18px; border-radius:10px; border:1px solid rgba(255,255,255,0.04)}
+  .modal h2{margin:0 0 10px 0; color:var(--neon)}
+  .form-row{display:flex; flex-direction:column; gap:8px; margin-bottom:8px}
+  input[type=text], input[type=password], input[type=email]{
+    padding:10px; border-radius:8px; border:1px solid rgba(255,255,255,0.04); background:transparent; color:#fff;
+  }
+  label{font-size:13px; color:var(--muted)}
+
+  /* ACCOUNT PAGE */
+  .account{background:var(--card); padding:12px; border-radius:10px}
+  .orders-list{display:flex; flex-direction:column; gap:8px}
+
+  /* Responsive */
+  @media (max-width:900px){
+    header{flex-direction:column; gap:8px; align-items:flex-start}
+    .cart-panel{position:fixed; left:50%; transform:translateX(-50%); bottom:12px; top:auto; width:92%}
+  }
 </style>
-
 </head>
 <body>
 
 <header>
-  <div class="logo">متجر لوفي</div>
-  <nav>
-    <a href="index.html">الرئيسية</a>
-    <a href="#cards">البطاقات</a>
-    <a href="#games">شحن ألعاب</a>
-    <a href="#contact">تواصل</a>
-  </nav>
+  <div style="display:flex;align-items:center;gap:12px">
+    <div class="logo">متجر لوفي</div>
+    <div style="font-size:13px;color:var(--muted)">بطاقات • شحن ألعاب • اشتراكات</div>
+  </div>
+
+  <div class="header-right">
+    <nav>
+      <a href="#pubg">ببجي</a>
+      <a href="#freefire">فري فاير</a>
+      <a href="#cards">بطاقات</a>
+      <a href="#subs">اشتراكات</a>
+      <a href="#contact">تواصل</a>
+    </nav>
+
+    <button class="icon-btn" id="open-cart-btn" title="السلة">
+      🧾 سلة <span id="cart-count" class="cart-count">0</span>
+    </button>
+
+    <button class="icon-btn" id="login-btn">دخول / حسابي</button>
+  </div>
 </header>
 
-<div class="hero">
-  <h1>أفضل متجر لشراء البطاقات و شحن الألعاب</h1>
+<main class="wrap">
+  <div class="hero">
+    <h1>أفضل عروض الشحن والبطاقات — توصيل فوري</h1>
+  </div>
+
+  <!-- فئات -->
+  <div class="cats" id="cats">
+    <div class="cat active" data-cat="all">الكل</div>
+    <div class="cat" data-cat="pubg">PUBG</div>
+    <div class="cat" data-cat="freefire">Free Fire</div>
+    <div class="cat" data-cat="cards">بطاقات</div>
+    <div class="cat" data-cat="subs">اشتراكات</div>
+    <div class="cat" data-cat="robux">Robux</div>
+  </div>
+
+  <!-- GRID المنتجات -->
+  <section class="grid" id="product-grid"></section>
+
+  <!-- قسم تواصل سريع -->
+  <section style="margin-top:30px; background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent); padding:14px; border-radius:10px;">
+    <div style="display:flex; justify-content:space-between; gap:12px; align-items:center; flex-wrap:wrap;">
+      <div>
+        <div style="font-weight:800; color:var(--neon); font-size:16px">📞 للتواصل و الطلب</div>
+        <div style="color:var(--muted)">واتساب / اتصال: +218 91 180 2061</div>
+      </div>
+      <div>
+        <a class="btn" href="https://wa.me/218911802061" target="_blank">راسلنا على واتساب</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- صفحة حسابي صغيرة (مثال في أسفل الصفحة) -->
+  <section id="account-section" style="margin-top:26px;">
+    <div class="account" id="account-box" style="display:none">
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:10px;">
+        <div>
+          <div style="font-weight:800; color:var(--neon)">حسابي</div>
+          <div class="small" id="account-email"></div>
+        </div>
+        <button class="btn ghost" id="logout-btn">تسجيل خروج</button>
+      </div>
+
+      <div style="margin-top:12px">
+        <div style="font-weight:700; margin-bottom:8px">الطلبات السابقة</div>
+        <div class="orders-list" id="orders-list"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer / contact -->
+  <footer id="contact" style="margin-top:30px; text-align:center; padding:24px; color:var(--muted)">
+    © 2025 متجر لوفي — جميع الحقوق محفوظة — للتواصل: +218 91 180 2061
+  </footer>
+</main>
+
+<!-- CART PANEL -->
+<div id="cart-panel" class="cart-panel" style="display:none">
+  <h3>سلة المشتريات</h3>
+  <div id="cart-items"></div>
+  <div class="cart-footer">
+    <div class="total-row"><div>الإجمالي</div><div id="cart-total">0 د.ل</div></div>
+    <div class="checkout-wrap">
+      <button class="btn" id="checkout-ws">الدفع عبر واتساب</button>
+      <button class="btn ghost" id="clear-cart">تفريغ</button>
+    </div>
+  </div>
 </div>
 
-<div class="section-title" id="cards">بطاقات رقمية</div>
-
-<div class="container">
-
-  <a href="product-google.html" class="card">
-    <img src="https://i.imgur.com/C8xR5cH.png">
-    <div class="card-title">بطاقة Google Play</div>
-  </a>
-
-  <a href="product-ps.html" class="card">
-    <img src="https://i.imgur.com/L8UQwPN.png">
-    <div class="card-title">بطاقة PlayStation</div>
-  </a>
-
-  <a href="product-xbox.html" class="card">
-    <img src="https://i.imgur.com/cgl3YMJ.png">
-    <div class="card-title">بطاقة Xbox</div>
-  </a>
-
-  <a href="product-steam.html" class="card">
-    <img src="https://i.imgur.com/TS7ImYJ.png">
-    <div class="card-title">Steam Card</div>
-  </a>
-
+<!-- LOGIN MODAL -->
+<div id="login-modal" style="display:none" class="modal" aria-hidden="true">
+  <div class="box">
+    <h2>تسجيل دخول / إنشاء حساب</h2>
+    <div class="form-row">
+      <label>البريد الإلكتروني</label>
+      <input id="login-email" type="email" placeholder="you@example.com">
+    </div>
+    <div class="form-row">
+      <label>كلمة المرور</label>
+      <input id="login-pass" type="password" placeholder="********">
+    </div>
+    <div style="display:flex; gap:8px; justify-content:flex-end; margin-top:8px">
+      <button class="btn" id="do-login">دخول</button>
+      <button class="btn ghost" id="create-acc">إنشاء حساب</button>
+      <button class="btn ghost" id="close-login">إغلاق</button>
+    </div>
+    <div style="margin-top:10px; color:var(--muted); font-size:13px">
+      ملاحظة: هذا تسجيل محلي للتجربة، لن نخزن شيء خارج متصفحك.
+    </div>
+  </div>
 </div>
 
-<div class="section-title" id="games">شحن ألعاب</div>
+<script>
+/* ============== بيانات المنتجات ============== */
+/* السعرات هنا كأمثلة — عدّلهم حسب ما تريده */
+const PRODUCTS = [
+  // PUBG
+  {id:'pubg-60', title:'PUBG 60 UC', cat:'pubg', price:3.50, img:'https://i.ibb.co/3r5cm0V/pubg-uc.jpg', desc:'شحن فوري لـ 60 UC'},
+  {id:'pubg-325', title:'PUBG 325 UC', cat:'pubg', price:15.00, img:'https://i.ibb.co/3r5cm0V/pubg-uc.jpg', desc:'شحن فوري لـ 325 UC'},
+  {id:'pubg-660', title:'PUBG 660 UC', cat:'pubg', price:28.00, img:'https://i.ibb.co/3r5cm0V/pubg-uc.jpg', desc:'شحن فوري لـ 660 UC'},
+  {id:'pubg-1800', title:'PUBG 1800 UC', cat:'pubg', price:72.00, img:'https://i.ibb.co/3r5cm0V/pubg-uc.jpg', desc:'شحن فوري لـ 1800 UC'},
 
-<div class="container">
+  // Free Fire
+  {id:'ff-100', title:'Free Fire 100 Diamonds', cat:'freefire', price:2.50, img:'https://i.ibb.co/1vTQG7F/freefire.jpg', desc:'شحن سريع للاعبي Free Fire'},
+  {id:'ff-310', title:'Free Fire 310 Diamonds', cat:'freefire', price:6.50, img:'https://i.ibb.co/1vTQG7F/freefire.jpg', desc:'شحن سريع للاعبي Free Fire'},
 
-  <a href="product-pubg.html" class="card">
-    <img src="https://i.imgur.com/IfAFDjT.png">
-    <div class="card-title">شدات PUBG</div>
-  </a>
+  // Cards
+  {id:'gp-10', title:'Google Play $10', cat:'cards', price:8.50, img:'https://i.ibb.co/C8xR5cH.png', desc:'بطاقة Google Play قيمة 10 دولار'},
+  {id:'it-15', title:'iTunes $15', cat:'cards', price:13.50, img:'https://i.ibb.co/umj9U9R.png', desc:'بطاقة iTunes قيمة 15 دولار'},
+  {id:'psn-20', title:'PlayStation $20', cat:'cards', price:18.00, img:'https://i.ibb.co/L8UQwPN.png', desc:'كود PSN قيمة 20 دولار'},
+  {id:'xbox-25', title:'Xbox $25', cat:'cards', price:22.00, img:'https://i.ibb.co/cgl3YMJ.png', desc:'بطاقة Xbox 25 دولار'},
+  {id:'steam-20', title:'Steam $20', cat:'cards', price:18.50, img:'https://i.ibb.co/TS7ImYJ.png', desc:'Steam Wallet 20$'},
 
-  <a href="product-freefire.html" class="card">
-    <img src="https://i.imgur.com/OCuPMgZ.png">
-    <div class="card-title">جواهر Free Fire</div>
-  </a>
+  // Subscriptions
+  {id:'net-1m', title:'Netflix 1 شهر', cat:'subs', price:6.00, img:'https://i.ibb.co/umj9U9R.png', desc:'اشتراك Netflix لشهر واحد'},
+  {id:'spot-1m', title:'Spotify 1 شهر', cat:'subs', price:2.50, img:'https://i.ibb.co/7Qz8hxq.png', desc:'اشتراك Spotify لشهر واحد'},
+  {id:'yt-1m', title:'YouTube Premium 1 شهر', cat:'subs', price:3.25, img:'https://i.ibb.co/7nG1V3v.png', desc:'اشتراك YT Premium شهر'},
 
-  <a href="product-robux.html" class="card">
-    <img src="https://i.imgur.com/ZywjgGm.png">
-    <div class="card-title">Robux</div>
-  </a>
+  // Robux
+  {id:'rob-400', title:'Robux 400', cat:'robux', price:4.00, img:'https://i.ibb.co/ZywjgGm.png', desc:'شحن Robux لحسابك'},
 
-</div>
+  // Extras
+  {id:'bundle-all', title:'حزمة كاملة (أشهر المنتجات)', cat:'all', price:99.00, img:'https://i.ibb.co/QP0pWpR/notfound.png', desc:'حزمة مميزة لشحن و بطاقات'}
+];
 
-<footer id="contact">
-  تم التطوير بواسطة Luffy Store © 2025
-</footer>
+/* ======== إدارة الواجهة و المنتجات ======== */
+const productGrid = document.getElementById('product-grid');
+const cats = document.getElementById('cats');
+const cartCountEl = document.getElementById('cart-count');
+const cartPanel = document.getElementById('cart-panel');
+const cartItemsEl = document.getElementById('cart-items');
+const cartTotalEl = document.getElementById('cart-total');
+const openCartBtn = document.getElementById('open-cart-btn');
+const clearCartBtn = document.getElementById('clear-cart');
+const checkoutWsBtn = document.getElementById('checkout-ws');
 
+let CART = JSON.parse(localStorage.getItem('luffy_cart')||'[]');
+let USER = JSON.parse(localStorage.getItem('luffy_user')||'null');
+
+/* render products by category */
+function renderProducts(filter='all'){
+  productGrid.innerHTML='';
+  const list = PRODUCTS.filter(p => filter==='all' ? true : p.cat === filter);
+  list.forEach(p=>{
+    const el = document.createElement('article');
+    el.className='card';
+    el.innerHTML = `
+      <img src="${p.img}" alt="${escapeHtml(p.title)}">
+      <div class="title">${escapeHtml(p.title)}</div>
+      <div class="desc">${escapeHtml(p.desc)}</div>
+      <div class="price-row">
+        <div class="price">${formatPrice(p.price)}</div>
+        <div class="actions">
+          <button class="btn ghost" onclick="viewProduct('${p.id}')">تفاصيل</button>
+          <button class="btn" onclick="addToCart('${p.id}')">أضف للسلة</button>
+        </div>
+      </div>
+    `;
+    productGrid.appendChild(el);
+  });
+}
+
+/* filter cats */
+document.querySelectorAll('.cat').forEach(el=>{
+  el.addEventListener('click', ()=>{
+    document.querySelectorAll('.cat').forEach(c=>c.classList.remove('active'));
+    el.classList.add('active');
+    renderProducts(el.dataset.cat === 'all' ? 'all' : el.dataset.cat);
+  });
+});
+
+/* format price */
+function formatPrice(n){ return n.toFixed(2) + ' د.ل'; }
+
+/* escape html */
+function escapeHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+/* CART functions */
+function saveCart(){ localStorage.setItem('luffy_cart', JSON.stringify(CART)); updateCartUI(); }
+function updateCartUI(){
+  cartCountEl.textContent = CART.reduce((s,i)=>s+i.qty,0);
+  cartItemsEl.innerHTML='';
+  if(CART.length===0){ cartItemsEl.innerHTML = '<div class="small" style="color:var(--muted)">سلة فارغة</div>'; cartTotalEl.textContent='0 د.ل'; return; }
+  let total=0;
+  CART.forEach(item=>{
+    const prod = PRODUCTS.find(p=>p.id===item.id);
+    if(!prod) return;
+    const row = document.createElement('div');
+    row.className='cart-item';
+    row.innerHTML = `
+      <img src="${prod.img}">
+      <div class="meta">
+        <div class="name">${escapeHtml(prod.title)}</div>
+        <div class="q small">الكمية: <strong>${item.qty}</strong></div>
+      </div>
+      <div style="text-align:left">
+        <div class="price">${formatPrice(prod.price * item.qty)}</div>
+        <div style="display:flex; gap:6px; margin-top:6px; justify-content:flex-end">
+          <button class="btn ghost" onclick="changeQty('${item.id}', -1)">-</button>
+          <button class="btn ghost" onclick="changeQty('${item.id}', 1)">+</button>
+          <button class="btn ghost" onclick="removeFromCart('${item.id}')">حذف</button>
+        </div>
+      </div>
+    `;
+    cartItemsEl.appendChild(row);
+    total += prod.price * item.qty;
+  });
+  cartTotalEl.textContent = total.toFixed(2) + ' د.ل';
+}
+
+/* add to cart */
+function addToCart(id){
+  const existing = CART.find(i=>i.id===id);
+  if(existing) existing.qty++;
+  else CART.push({id, qty:1});
+  saveCart();
+  showToast('أضيف إلى السلة');
+}
+
+/* change qty */
+function changeQty(id, delta){
+  const it = CART.find(i=>i.id===id);
+  if(!it) return;
+  it.qty += delta;
+  if(it.qty <= 0) CART = CART.filter(i=>i.id!==id);
+  saveCart();
+}
+
+/* remove */
+function removeFromCart(id){
+  CART = CART.filter(i=>i.id!==id);
+  saveCart();
+}
+
+/* clear */
+clearCartBtn.addEventListener('click', ()=>{
+  if(!confirm('هل تريد تفريغ السلة؟')) return;
+  CART = []; saveCart();
+});
+
+/* open/close cart */
+openCartBtn.addEventListener('click', ()=>{ cartPanel.style.display = cartPanel.style.display === 'none' ? 'block' : 'none'; updateCartUI(); });
+
+/* Checkout via WhatsApp */
+checkoutWsBtn.addEventListener('click', ()=>{
+  if(CART.length === 0){ alert('السلة فارغة'); return; }
+  // compose message
+  let msg = 'طلب من متجر لوفي %0A';
+  let total = 0;
+  CART.forEach(it=>{
+    const p = PRODUCTS.find(x=>x.id===it.id);
+    msg += `- ${encodeURIComponent(p.title)} x${it.qty} = ${ (p.price*it.qty).toFixed(2) } د.ل%0A`;
+    total += p.price*it.qty;
+  });
+  msg += `%0Aالإجمالي: ${total.toFixed(2)} د.ل%0A%0Aالاسم: %0Aالرقم: %0Aملاحظة: `;
+  // open whatsapp
+  const phone = '218911802061';
+  const url = `https://wa.me/${phone}?text=${msg}`;
+  window.open(url, '_blank');
+});
+
+/* small toast */
+function showToast(text){
+  const t = document.createElement('div'); t.textContent = text;
+  t.style.cssText = 'position:fixed; left:50%; transform:translateX(-50%); bottom:20px; background:#121212; color:#fff; padding:10px 14px; border-radius:8px; z-index:9999; box-shadow:0 6px 18px rgba(0,0,0,0.6)';
+  document.body.appendChild(t);
+  setTimeout(()=>{ t.style.opacity='0'; t.remove(); }, 1400);
+}
+
+/* PRODUCT DETAILS (simple modal page) */
+function viewProduct(id){
+  const p = PRODUCTS.find(x=>x.id===id);
+  if(!p) return;
+  // simple prompt-based details view (for single-file simplicity)
+  const details = `${p.title}\n\n${p.desc}\n\nالسعر: ${p.price.toFixed(2)} د.ل\n\nهل تريد إضافته للسلة؟`;
+  if(confirm(details)){
+    addToCart(id);
+  }
+}
+
+/* ============ LOGIN & ACCOUNT ============ */
+const loginBtn = document.getElementById('login-btn');
+const loginModal = document.getElementById('login-modal');
+const closeLogin = document.getElementById('close-login');
+const doLoginBtn = document.getElementById('do-login');
+const createAccBtn = document.getElementById('create-acc');
+const logoutBtn = document.getElementById('logout-btn');
+const accountBox = document.getElementById('account-box');
+const accountEmail = document.getElementById('account-email');
+const ordersList = document.getElementById('orders-list');
+
+loginBtn.addEventListener('click', ()=>{
+  loginModal.style.display = 'flex';
+});
+closeLogin.addEventListener('click', ()=> loginModal.style.display='none');
+
+doLoginBtn.addEventListener('click', ()=>{
+  const email = document.getElementById('login-email').value.trim();
+  const pass = document.getElementById('login-pass').value.trim();
+  if(!email || !pass){ alert('ادخل البريد وكلمة المرور'); return; }
+  // simple local "auth"
+  const user = {email};
+  USER = user;
+  localStorage.setItem('luffy_user', JSON.stringify(USER));
+  loginModal.style.display='none';
+  updateAccountUI();
+  showToast('تم تسجيل الدخول');
+});
+
+createAccBtn.addEventListener('click', ()=>{
+  const email = document.getElementById('login-email').value.trim();
+  const pass = document.getElementById('login-pass').value.trim();
+  if(!email || !pass){ alert('ادخل البريد وكلمة المرور'); return; }
+  // create account (local)
+  const user = {email, orders:[]};
+  USER = user;
+  localStorage.setItem('luffy_user', JSON.stringify(USER));
+  loginModal.style.display='none';
+  updateAccountUI();
+  showToast('تم إنشاء الحساب');
+});
+
+logoutBtn && logoutBtn.addEventListener('click', ()=>{
+  if(confirm('هل تريد تسجيل الخروج؟')){
+    USER = null; localStorage.removeItem('luffy_user');
+    updateAccountUI();
+  }
+});
+
+function updateAccountUI(){
+  if(USER){
+    accountBox.style.display='block';
+    accountEmail.textContent = USER.email || '';
+    // load orders
+    const orders = JSON.parse(localStorage.getItem('luffy_orders_'+(USER.email||'guest')) || '[]');
+    ordersList.innerHTML = '';
+    if(orders.length===0) ordersList.innerHTML = '<div class="small" style="color:var(--muted)">لا توجد طلبات بعد</div>';
+    orders.forEach(o=>{
+      const d = document.createElement('div');
+      d.style.background='rgba(255,255,255,0.02)';
+      d.style.padding='8px'; d.style.borderRadius='8px';
+      d.innerHTML = `<div style="font-weight:700">${escapeHtml(o.id)}</div><div class="small">المحتوى: ${escapeHtml(o.items)}</div><div style="margin-top:6px;color:var(--muted)">المبلغ: ${o.total} د.ل</div>`;
+      ordersList.appendChild(d);
+    });
+  } else {
+    accountBox.style.display='none';
+  }
+}
+
+/* place order locally (when checkout via whatsapp, we'll also save order) */
+function placeOrderAndSave(contactName, contactPhone){
+  if(!USER){ alert('سجّل الدخول لحفظ الطلب في حسابك'); return; }
+  if(CART.length===0){ alert('السلة فارغة'); return; }
+  const itemsDesc = CART.map(i=>{
+    const p = PRODUCTS.find(x=>x.id===i.id);
+    return `${p.title} x${i.qty}`;
+  }).join(' ، ');
+  const total = CART.reduce((s,i)=>s + (PRODUCTS.find(p=>p.id===i.id).price * i.qty), 0).toFixed(2);
+  const order = {id:'ORD-'+Date.now(), items: itemsDesc, total};
+  // save to localstorage under user email
+  const key = 'luffy_orders_' + (USER.email||'guest');
+  const arr = JSON.parse(localStorage.getItem(key) || '[]');
+  arr.unshift(order);
+  localStorage.setItem(key, JSON.stringify(arr));
+  // clear cart
+  CART = []; saveCart();
+  updateAccountUI();
+  showToast('تم حفظ الطلب في حسابك');
+  return order;
+}
+
+/* override checkout to also save order if logged in */
+checkoutWsBtn.addEventListener('click', async ()=>{
+  if(CART.length === 0){ alert('السلة فارغة'); return; }
+  let proceed = true;
+  if(USER){
+    // save order locally
+    const order = placeOrderAndSave();
+    // then open whatsapp
+    // create message from saved order
+    let msg = `طلب من متجر لوفي%0Aرقم الطلب: ${encodeURIComponent(order.id)}%0A`;
+    CART.length=0; // already cleared on save
+    // we create message based on saved order content:
+    msg += `المحتويات: ${encodeURIComponent(order.items)}%0A`;
+    msg += `الإجمالي: ${order.total} د.ل%0A`;
+    msg += `%0Aالاسم: %0Aالرقم: %0Aملاحظة: `;
+    const url = `https://wa.me/218911802061?text=${msg}`;
+    window.open(url, '_blank');
+    return;
+  } else {
+    // not logged: ask user to confirm and open whatsapp with message, but not saved
+    if(!confirm('أنت غير مسجّل. هل ترغب بفتح واتساب للدفع وحفظ الطلب محلياً؟')) return;
+    // build message
+    let msg = 'طلب من متجر لوفي %0A';
+    let total = 0;
+    CART.forEach(it=>{
+      const p = PRODUCTS.find(x=>x.id===it.id);
+      msg += `- ${encodeURIComponent(p.title)} x${it.qty} = ${ (p.price*it.qty).toFixed(2) } د.ل%0A`;
+      total += p.price*it.qty;
+    });
+    msg += `%0Aالإجمالي: ${total.toFixed(2)} د.ل%0A%0Aالاسم: %0Aالرقم: %0Aملاحظة: `;
+    const url = `https://wa.me/218911802061?text=${msg}`;
+    // we DO NOT save order if not logged
+    window.open(url, '_blank');
+  }
+});
+
+/* initialize */
+function init(){
+  renderProducts('all');
+  updateCartUI();
+  if(USER) updateAccountUI();
+  // make cats clickable already done
+}
+init();
+
+/* small helper: add keyboard ESC to close modals */
+document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ loginModal.style.display='none'; cartPanel.style.display='none'; } });
+
+/* expose some functions to global scope for inline onclick */
+window.addToCart = addToCart;
+window.viewProduct = viewProduct;
+window.changeQty = changeQty;
+window.removeFromCart = removeFromCart;
+window.formatPrice = formatPrice;
+</script>
 </body>
 </html>
