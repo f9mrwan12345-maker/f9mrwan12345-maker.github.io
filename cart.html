@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>السلة — متجر لوفي</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <div class="logo">متجر لوفي</div>
+    <nav class="main-nav">
+      <a href="index.html">الرئيسية</a>
+      <a href="account.html">حسابي</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section>
+    <h2>سلة المشتريات</h2>
+    <div id="cart-area"></div>
+    <div id="cart-summary" style="margin-top:12px"></div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  © 2025 متجر لوفي
+</footer>
+
+<script>
+const CART = JSON.parse(localStorage.getItem('luffy_cart')||'[]');
+const PRODUCTS = JSON.parse(localStorage.getItem('luffy_products') || 'null');
+function formatPrice(n){ return n.toFixed(2) + ' د.ل'; }
+
+const cartArea = document.getElementById('cart-area');
+const summary = document.getElementById('cart-summary');
+if(CART.length===0){ cartArea.innerHTML = '<div class="small muted">السلة فارغة</div>'; summary.innerHTML=''; }
+else {
+  let total=0;
+  CART.forEach(it=>{
+    const p = PRODUCTS.find(x=>x.id===it.id);
+    const box = document.createElement('div');
+    box.className='card';
+    box.innerHTML = `<div style="display:flex; gap:10px; align-items:center"><img src="${p.img}" style="width:80px;height:60px;object-fit:cover;border-radius:6px"><div>
+      <div class="title">${p.title}</div>
+      <div class="small muted">${p.desc}</div>
+      <div style="margin-top:6px"><strong>${formatPrice(p.price)} x ${it.qty}</strong></div>
+    </div></div>`;
+    cartArea.appendChild(box);
+    total += p.price * it.qty;
+  });
+  summary.innerHTML = `<div class="card"><div style="display:flex;justify-content:space-between;align-items:center"><div>الإجمالي</div><div style="font-weight:800">${formatPrice(total)}</div></div>
+  <div style="margin-top:10px;display:flex;gap:10px"><a class="btn" id="pay-ws" href="#">الدفع عبر واتساب</a><button class="btn ghost" id="clear">تفريغ السلة</button></div></div>`;
+  document.getElementById('pay-ws').addEventListener('click', ()=>{
+    // build message
+    let msg = 'طلب من متجر لوفي %0A';
+    let tot = 0;
+    CART.forEach(i=>{
+      const p = PRODUCTS.find(x=>x.id===i.id);
+      msg += `- ${encodeURIComponent(p.title)} x${i.qty} = ${ (p.price*i.qty).toFixed(2) } د.ل%0A`;
+      tot += p.price*i.qty;
+    });
+    msg += `%0Aالإجمالي: ${tot.toFixed(2)} د.ل%0A%0Aالاسم:%0Aالرقم:%0Aملاحظة:`;
+    window.open(`https://wa.me/218911802061?text=${msg}`,'_blank');
+  });
+  document.getElementById('clear').addEventListener('click', ()=>{
+    if(confirm('تفريغ السلة؟')){ localStorage.removeItem('luffy_cart'); location.reload(); }
+  });
+}
+</script>
+</body>
+  </html>
