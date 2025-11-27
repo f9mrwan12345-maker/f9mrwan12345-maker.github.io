@@ -1,37 +1,172 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متجر لوفي</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>متجر لوفي – بطاقات و شحن ألعاب</title>
+
+<style>
+body {
+  margin:0;
+  font-family: Arial, sans-serif;
+  background:#0b0b0c;
+  color:white;
+}
+
+/*HEADER*/
+header {
+  background:#111;
+  padding:15px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+header .logo {
+  font-size:22px;
+  font-weight:bold;
+  color:#00eaff;
+}
+nav a {
+  margin-left:15px;
+  color:#fff;
+  text-decoration:none;
+  font-size:16px;
+}
+nav a:hover { color:#00eaff; }
+
+/* HERO */
+.hero {
+  background:url('https://i.imgur.com/9E1iN0i.jpeg') center/cover no-repeat;
+  height:230px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+.hero h1 {
+  background:rgba(0,0,0,0.6);
+  padding:15px 25px;
+  border-radius:10px;
+  font-size:26px;
+}
+
+/* SECTION TITLE */
+.section-title {
+  padding:20px;
+  font-size:22px;
+  color:#00eaff;
+  font-weight:bold;
+}
+
+/* CARDS GRID */
+.container {
+  padding:20px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(170px,1fr));
+  gap:20px;
+}
+
+.card {
+  background:#19191b;
+  padding:10px;
+  border-radius:12px;
+  text-align:center;
+  transition:0.3s;
+  cursor:pointer;
+}
+.card:hover {
+  transform:scale(1.05);
+}
+.card img {
+  width:100%;
+  border-radius:10px;
+}
+.card-title {
+  font-size:17px;
+  margin-top:10px;
+  font-weight:bold;
+}
+
+/* FOOTER */
+footer {
+  margin-top:25px;
+  background:#111;
+  padding:15px;
+  text-align:center;
+  color:#999;
+}
+</style>
+
 </head>
 <body>
 
-    <header>
-        <h1>متجر لوفي</h1>
-        <p>أفضل متجر لبيع المنتجات أونلاين</p>
-    </header>
+<header>
+  <div class="logo">متجر لوفي</div>
+  <nav>
+    <a href="index.html">الرئيسية</a>
+    <a href="#cards">البطاقات</a>
+    <a href="#games">شحن ألعاب</a>
+    <a href="#contact">تواصل</a>
+  </nav>
+</header>
 
-    <section class="products">
-        <div class="product">
-            <img src="https://i.ibb.co/ySgh0jc/luffy.jpg" alt="منتج">
-            <h3>اسم المنتج</h3>
-            <p>وصف بسيط للمنتج.</p>
-            <button>اطلب الآن</button>
-        </div>
+<div class="hero">
+  <h1>أفضل متجر لشراء البطاقات و شحن الألعاب</h1>
+</div>
 
-        <div class="product">
-            <img src="https://i.ibb.co/ySgh0jc/luffy.jpg" alt="منتج">
-            <h3>اسم المنتج 2</h3>
-            <p>وصف بسيط للمنتج.</p>
-            <button>اطلب الآن</button>
-        </div>
-    </section>
+<div class="section-title" id="cards">بطاقات رقمية</div>
 
-    <footer>
-        © 2025 متجر لوفي - جميع الحقوق محفوظة
-    </footer>
+<div class="container">
+
+  <a href="product-google.html" class="card">
+    <img src="https://i.imgur.com/C8xR5cH.png">
+    <div class="card-title">بطاقة Google Play</div>
+  </a>
+
+  <a href="product-ps.html" class="card">
+    <img src="https://i.imgur.com/L8UQwPN.png">
+    <div class="card-title">بطاقة PlayStation</div>
+  </a>
+
+  <a href="product-xbox.html" class="card">
+    <img src="https://i.imgur.com/cgl3YMJ.png">
+    <div class="card-title">بطاقة Xbox</div>
+  </a>
+
+  <a href="product-steam.html" class="card">
+    <img src="https://i.imgur.com/TS7ImYJ.png">
+    <div class="card-title">Steam Card</div>
+  </a>
+
+</div>
+
+<div class="section-title" id="games">شحن ألعاب</div>
+
+<div class="container">
+
+  <a href="product-pubg.html" class="card">
+    <img src="https://i.imgur.com/IfAFDjT.png">
+    <div class="card-title">شدات PUBG</div>
+  </a>
+
+  <a href="product-freefire.html" class="card">
+    <img src="https://i.imgur.com/OCuPMgZ.png">
+    <div class="card-title">جواهر Free Fire</div>
+  </a>
+
+  <a href="product-robux.html" class="card">
+    <img src="https://i.imgur.com/ZywjgGm.png">
+    <div class="card-title">Robux</div>
+  </a>
+
+</div>
+
+<footer id="contact">
+  تم التطوير بواسطة Luffy Store © 2025
+</footer>
 
 </body>
 </html>
