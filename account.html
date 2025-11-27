@@ -1,40 +1,69 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html>
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>حسابي — متجر لوفي</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>لوحة حسابي - متجر لوفي</title>
+    <style>
+        body{font-family:sans-serif;background:#111;color:#fff;text-align:center;padding:20px}
+        .box{background:#1c1c1c;padding:15px;border-radius:12px;margin:10px auto;width:90%}
+        button{padding:10px 20px;background:#ffcc00;border:0;border-radius:10px;font-size:17px;margin:5px}
+        #devPanel{display:none;background:#222;padding:15px;border-radius:12px;margin-top:15px}
+        input{padding:10px;border-radius:8px;border:0;width:80%;font-size:16px;margin-top:10px}
+    </style>
 </head>
 <body>
-<header class="site-header">
-  <div class="wrap header-inner">
-    <div class="logo">متجر لوفي</div>
-    <nav class="main-nav">
-      <a href="index.html">الرئيسية</a>
-      <a href="cart.html">السلة</a>
-    </nav>
-  </div>
-</header>
 
-<main class="wrap">
-  <section class="account-area">
-    <h2>حسابي</h2>
-    <div id="acc-info" class="card"></div>
+<h2>⚡ لوحة حسابي — متجر لوفي</h2>
 
-    <h3>الطلبات</h3>
-    <div id="acc-orders"></div>
-  </section>
-</main>
+<div class="box">
+    <h3>💰 رصيدك</h3>
+    <p id="balance">0.00 LYD</p>
+    <button onclick="addCredit()">إضافة رصيد</button>
+</div>
 
-<footer class="site-footer">
-  © 2025 متجر لوفي
-</footer>
+<div class="box">
+    <h3>🛒 السلة</h3>
+    <button onclick="alert('السلة فارغة')">عرض السلة</button>
+</div>
+
+<div class="box">
+    <h3>📦 الطلبات</h3>
+    <button onclick="alert('لا توجد طلبات بعد')">عرض الطلبات</button>
+</div>
+
+<div class="box">
+    <h3>⚙️ قسم المطورين</h3>
+    <input type="password" id="devPass" placeholder="أدخل كلمة السر">
+    <button onclick="checkDev()">دخول المطورين</button>
+</div>
+
+<div id="devPanel">
+    <h3>🛠 Developer Panel — قسم المطورين</h3>
+    <p>إضافة منتجات – تعديل أسعار – حذف – رفع صور – نظام الطلبات</p>
+    <button onclick="alert('فتح لوحة المطورين')">دخول</button>
+</div>
 
 <script>
-const user = JSON.parse(localStorage.getItem('luffy_user')||'null');
-if(!user){ alert('سجّل الدخول أولاً'); location.href='login.html'; }
-document.getElementById('acc-info').innerHTML = `<p><strong>البريد:</strong> ${user.email}</p>
+    function checkDev() {
+        let pass = document.getElementById("devPass").value;
+        if(pass === "q5Eq_z+7r#Kpe!Y"){
+            document.getElementById("devPanel").style.display = "block";
+            alert("تم فتح قسم المطورين ✔");
+        } else {
+            alert("❌ كلمة السر خاطئة");
+        }
+    }
+
+    function addCredit(){
+        let amount = prompt("كم رصيد تبي تضيف؟");
+        if(amount){
+            document.getElementById("balance").innerText = amount + " LYD";
+        }
+    }
+</script>
+
+</body>
+</html>document.getElementById('acc-info').innerHTML = `<p><strong>البريد:</strong> ${user.email}</p>
 <button class="btn ghost" id="logout">تسجيل خروج</button>`;
 document.getElementById('logout').addEventListener('click', ()=>{ localStorage.removeItem('luffy_user'); location.href='index.html'; });
 
