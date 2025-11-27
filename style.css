@@ -1,79 +1,41 @@
-/* خلفية الموقع */
-body {
-    margin: 0;
-    font-family: "Tajawal", sans-serif;
-    background: #0a0a0a;
-    color: white;
+:root{
+  --bg:#0b0b0c; --card:#141416; --accent:#ff0033; --neon:#00eaff; --muted:#9aa0a6;
 }
-
-/* الهيدر */
-header {
-    background: linear-gradient(90deg, #0F0C29, #302B63, #24243E);
-    padding: 25px;
-    text-align: center;
-    border-bottom: 2px solid #00FF9D;
-}
-
-header h1 {
-    font-size: 32px;
-    color: #00FF9D;
-    margin: 0;
-}
-
-header p {
-    color: #ccc;
-}
-
-/* المنتجات */
-.products {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
-    padding: 20px;
-}
-
-.product {
-    background: #111;
-    padding: 15px;
-    border-radius: 15px;
-    box-shadow: 0 0 15px #00FF9D33;
-    text-align: center;
-    transition: 0.3s;
-}
-
-.product:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 20px #00FF9D;
-}
-
-.product img {
-    width: 100%;
-    border-radius: 10px;
-}
-
-/* الأزرار */
-button {
-    background: #00FF9D;
-    color: #000;
-    padding: 12px 18px;
-    border: none;
-    border-radius: 10px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 10px;
-    transition: 0.3s;
-}
-
-button:hover {
-    background: #00c77d;
-}
-
-/* الفوتر */
-footer {
-    text-align: center;
-    padding: 15px;
-    margin-top: 30px;
-    background: #111;
-    border-top: 1px solid #00FF9D;
-}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Tajawal", "Cairo", Arial, sans-serif;background:linear-gradient(180deg,var(--bg),#070707);color:#fff;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1100px;margin:18px auto;padding:0 16px}
+.site-header{background:linear-gradient(90deg,#071018 0%, #0b0b0c 100%);padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.03)}
+.header-inner{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{font-weight:800;color:var(--neon);font-size:20px}
+.main-nav a{color:#ddd;text-decoration:none;margin-left:10px;padding:8px 10px;border-radius:8px;transition:.15s}
+.main-nav a:hover{background:rgba(255,255,255,0.03);color:var(--neon)}
+.hero{border-radius:10px;overflow:hidden;margin:16px 0;position:relative}
+.slider{display:flex;gap:0;overflow:hidden;height:220px}
+.slide{min-width:100%;transition:transform .5s;opacity:0}
+.slide img{width:100%;height:220px;object-fit:cover;display:block}
+.slide.active{opacity:1}
+.hero-search{position:absolute;left:50%;transform:translateX(-50%);bottom:18px;width:90%;display:flex}
+.hero-search input{width:100%;padding:12px;border-radius:10px;border:0;background:rgba(0,0,0,0.5);color:#fff;outline:0}
+.cats{display:flex;gap:8px;overflow:auto;padding:8px 0;margin-top:6px}
+.cat-btn{background:transparent;border:1px solid rgba(255,255,255,0.03);color:#ddd;padding:8px 12px;border-radius:999px;cursor:pointer}
+.cat-btn.active{background:linear-gradient(90deg,var(--neon),#00a8c3);color:#071018;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin-top:16px}
+.card{background:var(--card);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.02)}
+.card img{width:100%;height:150px;object-fit:cover;border-radius:8px}
+.title{font-weight:800;color:#fff;margin-top:6px}
+.desc{color:var(--muted);font-size:13px;min-height:36px}
+.price-row{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+.price{color:#bff789;font-weight:800}
+.actions{display:flex;gap:8px}
+.btn{background:var(--neon);color:#071018;border:none;padding:10px 12px;border-radius:8px;cursor:pointer;text-decoration:none;display:inline-block}
+.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:#fff}
+.small{font-size:13px}
+.muted{color:var(--muted)}
+.site-footer{background:#111;padding:18px;text-align:center;margin-top:26px;color:var(--muted)}
+.auth-box{max-width:480px;margin:20px auto;background:var(--card);padding:16px;border-radius:10px}
+.auth-box input{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:#fff;margin-bottom:8px}
+.row{display:flex;gap:8px}
+.account-area .card{margin-top:8px}
+.quick-contact{margin-top:18px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:12px;border-radius:10px}
+.small-badge{background:var(--accent);padding:2px 6px;border-radius:12px;color:#fff;font-weight:700;margin-left:6px}
+@media (max-width:800px){ .header-inner{flex-direction:column;align-items:flex-start} .hero{height:180px}.slide img{height:180px} }
