@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>تسجيل دخول — متجر لوفي</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <div class="logo">متجر لوفي</div>
+    <nav class="main-nav">
+      <a href="index.html">الرئيسية</a>
+      <a href="cart.html">السلة</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="auth-box">
+    <h2>تسجيل دخول / إنشاء حساب</h2>
+
+    <label>البريد الإلكتروني</label>
+    <input id="email" type="email" placeholder="you@example.com">
+
+    <label>كلمة المرور</label>
+    <input id="pass" type="password" placeholder="********">
+
+    <div class="row">
+      <button id="btn-login" class="btn">دخول</button>
+      <button id="btn-register" class="btn ghost">إنشاء حساب</button>
+    </div>
+
+    <p class="small muted">التسجيل محلي للاستخدام مع هذه النسخة: يخزن في متصفحك فقط.</p>
+  </section>
+</main>
+
+<footer class="site-footer">
+  © 2025 متجر لوفي
+</footer>
+
+<script>
+/* بسيط: حفظ المستخدم في localStorage */
+document.getElementById('btn-register').addEventListener('click', ()=>{
+  const email = document.getElementById('email').value.trim();
+  const pass = document.getElementById('pass').value.trim();
+  if(!email||!pass){ alert('ادخل البريد و كلمة المرور'); return; }
+  localStorage.setItem('luffy_user', JSON.stringify({email}));
+  alert('تم إنشاء الحساب'); location.href='index.html';
+});
+document.getElementById('btn-login').addEventListener('click', ()=>{
+  const email = document.getElementById('email').value.trim();
+  const pass = document.getElementById('pass').value.trim();
+  if(!email||!pass){ alert('ادخل البريد و كلمة المرور'); return; }
+  localStorage.setItem('luffy_user', JSON.stringify({email}));
+  alert('تم تسجيل الدخول'); location.href='index.html';
+});
+</script>
+</body>
+</html>
