@@ -50,3 +50,69 @@ else orders.forEach(o=>{
 </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>لوحة حسابي - متجر لوفي</title>
+    <style>
+        body{font-family:sans-serif;background:#111;color:#fff;text-align:center;padding:20px}
+        .box{background:#1c1c1c;padding:15px;border-radius:12px;margin:10px auto;width:90%}
+        button{padding:10px 20px;background:#ffcc00;border:0;border-radius:10px;font-size:17px;margin:5px}
+        #devPanel{display:none;background:#222;padding:15px;border-radius:12px;margin-top:15px}
+        input{padding:10px;border-radius:8px;border:0;width:80%;font-size:16px;margin-top:10px}
+    </style>
+</head>
+<body>
+
+<h2>⚡ لوحة حسابي — متجر لوفي</h2>
+
+<div class="box">
+    <h3>💰 رصيدك</h3>
+    <p id="balance">0.00 LYD</p>
+    <button onclick="addCredit()">إضافة رصيد</button>
+</div>
+
+<div class="box">
+    <h3>🛒 السلة</h3>
+    <button onclick="alert('السلة فارغة')">عرض السلة</button>
+</div>
+
+<div class="box">
+    <h3>📦 الطلبات</h3>
+    <button onclick="alert('لا توجد طلبات بعد')">عرض الطلبات</button>
+</div>
+
+<div class="box">
+    <h3>⚙️ قسم المطورين</h3>
+    <input type="password" id="devPass" placeholder="أدخل كلمة السر">
+    <button onclick="checkDev()">دخول المطورين</button>
+</div>
+
+<div id="devPanel">
+    <h3>🛠 Developer Panel — قسم المطورين</h3>
+    <p>إضافة منتجات – تعديل أسعار – حذف – رفع صور – نظام الطلبات</p>
+    <button onclick="alert('فتح لوحة المطورين')">دخول</button>
+</div>
+
+<script>
+    function checkDev() {
+        let pass = document.getElementById("devPass").value;
+        if(pass === "q5Eq_z+7r#Kpe!Y"){
+            document.getElementById("devPanel").style.display = "block";
+            alert("تم فتح قسم المطورين ✔");
+        } else {
+            alert("❌ كلمة السر خاطئة");
+        }
+    }
+
+    function addCredit(){
+        let amount = prompt("كم رصيد تبي تضيف؟");
+        if(amount){
+            document.getElementById("balance").innerText = amount + " LYD";
+        }
+    }
+</script>
+
+</body>
+</html>
